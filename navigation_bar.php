@@ -1,5 +1,5 @@
 <?php
-if($_SESSION['admin_priv'] == "B_ADMIN"){
+if($_SESSION['admin_priv'] != "B_ADMIN"){
   ?>
 
   <!-- Menu -->
