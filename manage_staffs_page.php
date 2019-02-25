@@ -319,13 +319,23 @@ $(document).ready(function(){
 });
 
 </script>
-
+<script type="text/javascript">
+$(function () {
+        $("#ig_checkbox").click(function () {
+            if ($(this).is(":checked")) {
+                $("#autoUpdate").show();
+            } else {
+                $("#autoUpdate").hide();
+            }
+        });
+    });
+</script>
 
 </div> <!-- End of Button DIV -->
 
 
 <!-- Jquery Core Js -->
-
+<!-- <script src="Jquery/jquery-2.2.3.min.js"></script> -->
 
 <!-- Bootstrap Core Js -->
 <script src="plugins/bootstrap/js/bootstrap.js"></script>
