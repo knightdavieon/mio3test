@@ -1,6 +1,6 @@
 <?php require_once('Connection.php'); ?>
- 
-<?php 
+
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
@@ -8,12 +8,12 @@ $year = date('Y');
 $fullDate = $month . "/" . $day . "/" . $year;
  session_start();
 ?>
-      <?php 
+      <?php
                        if(isset($_POST['btn_export'])){
                               ob_end_clean();
                               $output = fopen('php://output', 'w');
                               header('Content-Type: text/csv; charset=utf-8');
-                              header('Content-Disposition: attachment; filename=inventory.csv'); 
+                              header('Content-Disposition: attachment; filename=inventory.csv');
                               fputcsv($output, array("Item Barcode", "Description", "Category", "Sub Category ", "Quantity","Price"));
                               $query = "Select * from tbl_branch_goods_receive where branch_name = '" . $_SESSION['b_code'] . "'";
                               $result = mysqli_query($conn, $query);
@@ -27,11 +27,11 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                     "Price"=>$rows['item_price']
                                  ));
                               }
-                              
+
                               exit();
                        }
                     ?>
-                    <?php 
+                    <?php
                       if(isset($_POST['btn_exp_csv'])){
                          $item_bcode = mysqli_real_escape_string($conn, $_POST['item_bcode']);
                          $tbl_branch_goods_receive_history = mysqli_query($conn, "Select Sum(item_quant) as quant_total from tbl_branch_goods_receive_history where item_barcode = '" . $item_bcode . "' and branch = '" . $_SESSION['b_code'] . "'");
@@ -46,9 +46,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                               ob_end_clean();
                               $output = fopen('php://output', 'w');
                               header('Content-Type: text/csv; charset=utf-8');
-                              header('Content-Disposition: attachment; filename=inv_per_item.csv'); 
+                              header('Content-Disposition: attachment; filename=inv_per_item.csv');
                               fputcsv($output, array("Item Received(HO)", "Item Received (Branch)", "Transfered Quantity", "Sales", "Total"));
-                            
+
                                 fputcsv($output, array(
                                   "ITRH"=> $tbl_branch_goods_receive_history_rows['quant_total'],
                                   "ITRB"=> $tbl_branch_transfer_history_received_rows['quant_total'],
@@ -56,8 +56,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                   "Sales"=>$tbl_sales_rows['quant_total'],
                                   "Total"=>$total_count
                                  ));
-                              
-                              
+
+
                               exit();
                       }
                     ?>
@@ -101,7 +101,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -109,14 +109,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
      <!-- End of Font Awesome -->
-   
-    
+
+
 </head>
 
 <body class="theme-black">
@@ -137,17 +137,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-          
+
             </div>
             <!-- Input -->
-           
+
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card" style="margin-top:-50px;">
@@ -156,18 +156,18 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                   <i class="material-icons"> storage  </i> Inventory
                                 <small> <i> " List of items in your store " </i> </small>
                             </h2>
-                         
+
                         </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
-                  
+
                     <form method="post" action="<?php echo  $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
-                            
+
                               <button type="submit" class="btn btn-success" name="btn_export" style="height:30px;padding-top:0px;margin-left:20px;"><i class="material-icons" style="padding-top:0;"> grid_on </i> Export as (CSV) </button>
                            <div class="col-md-12 col-sm-10 col-xs-10" style="margin-top:20px;">
-                           
+
                                    <style type="text/css">
                                             table.dataTable thead th{
                                                    background-color:gray;
@@ -175,8 +175,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                    opacity:0.7;
                                             }
                                       </style>
-                                  
-                                     
+
+
                                     <table id="r_items" class="table table-bordered table-striped">
                                            <thead>
                                                  <th> Barcode  </th>
@@ -186,7 +186,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                  <th> Quantity  </th>
                                               </thead>
                                               <tbody>
-                                                    <?php 
+                                                    <?php
                                                         $item_query = "Select * from tbl_branch_goods_receive where branch_name = '" . $_SESSION['b_code'] . "'";
                                                         $item_result = mysqli_query($conn, $item_query);
                                                         while($item_rows = mysqli_fetch_array($item_result)){
@@ -229,23 +229,23 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                     }
                                                                  });
                                                            });
-                                                                    
-                                                          
+
+
                                                        </script>
                                                  </tbody>
                                        </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
                 </form>
          <!-- Second Form -->
 
-     
+
      <!-- #END# of second form -->
      <!-- Third Form -->
          <!-- #END# of Third form -->
@@ -269,9 +269,10 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> <!-- Main Margin -->
                         <div class="row">
-                          
-                                <?php 
-                                 //  $item_info_query = "Select * from tbl_branch_goods_receive where item_barcode = '" 
+
+                                <?php
+                                //echo $_SERVER['PHP_SELF'];
+                                 //  $item_info_query = "Select * from tbl_branch_goods_receive where item_barcode = '"
                                 ?>
                                          <input type="hidden" id="item_barcode" name="item_bcode">
                                          <input type="hidden" id="b_code" value="<?php echo $_SESSION['b_code']; ?>">
@@ -279,12 +280,12 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                <div id="content_info_div"> </div>
                           </div>
                     </div> <!-- #END# Main Margin -->
-                  
+
                </div>
                </form>
       </div>
-      <div class="modal-footer">    
-        
+      <div class="modal-footer">
+
       </div>
     </div>
   </div>
@@ -292,14 +293,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
  </form>
    <!-- #END# OF MODAL BOX 1 -->
                         </div>
-                        
 
-                    
+
+
 
                     </div>
                 </div>
             </div>
-         
+
      </div>
     </section>
         <script>
@@ -307,17 +308,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
             $('#r_items').DataTable({
                 responsive:true
             });
-           
+
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>

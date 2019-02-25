@@ -1,11 +1,43 @@
-<?php require_once('Connection.php'); ?>
-<?php 
+<?php require_once('Connection.php');
+$transcode = mysqli_real_escape_string($conn,$_REQUEST['icode']);
+//echo "<script> alert(".$_GET['icode']."); </script>";
+?>
+
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
 $year = date('Y');
 $fullDate = $month . "/" . $day . "/" . $year;
 
+
+if(isset($_POST['btn_branch_csv'])){
+
+  ob_end_clean();
+  $output = fopen('php://output', 'w');
+  header('Content-Type: text/csv; charset=utf-8');
+  header('Content-Disposition: attachment; filename=branch_goods_receive_history_trans_'.$transcode.'.csv');
+  fputcsv($output,array("Branch ","received ","transaction number -", $transcode));
+  fputcsv($output, array("Transaction Number", "Item Barcode", "Item Name", "Category", "Sub Category", "Quantity", "Price", "Remarks", "TS Type"));
+  $query = "Select * from tbl_branch_goods_receive_history where transaction_number = '" . $transcode . "'";
+  $result = mysqli_query($conn, $query);
+  while($rows = mysqli_fetch_array($result)){
+    fputcsv($output, array(
+        "Transaction Number"=>$rows['transaction_number'],
+        "Item Barcode"=>$rows['item_barcode'],
+        "Item Name"=>$rows['item_name'],
+        "Category"=>$rows['cat'],
+        "Sub Category"=>$rows['sub_category'],
+        "Quantity"=>$rows['item_quant'],
+        "Price"=>$rows['item_price'],
+        "Remarks"=>$rows['remarks'],
+        "TS Type"=>$rows['ts_type']
+     ));
+  }
+
+exit();
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +78,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -54,7 +86,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
@@ -80,7 +112,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
@@ -98,12 +130,12 @@ $fullDate = $month . "/" . $day . "/" . $year;
                         <div class="header">
                                 <h2><i class="material-icons"> info </i> Information </h2>
                            </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                                   <?php 
+                                   <?php
                                         $info_query = "Select * from tbl_branch_goods_receive_history where transaction_number = '" . stripslashes($_GET['icode']) . "'";
                                         $info_result = mysqli_query($conn, $info_query)or die('<script type="text/javascript"> alert("'. mysqli_error($conn) .'") </script>');
                                         $info_rows = mysqli_fetch_array($info_result);
@@ -118,8 +150,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                         foreach($array_quant as $array_frows){
                                              $array_sum[] = $array_frows['item_quant'] * $array_frows['item_price'];
                                         }
-                                        
-                                      
+
+
                                    ?>
                                       <div class="col-md-4 col-lg-5 col-sm-5 col-xs-5">
                                             <label> Transaction Number : </label>
@@ -151,21 +183,21 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                             <label style="color:#cc0000;"><small> P <?php echo array_sum($array_sum); ?> </small></label>
                                          </div>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-                         
+
                         </div>
-                        
+
                     </div>
             <!-- #END#  Item information -->
             <!-- Transfered Items Form -->
-                
+
             <!-- #END# of transfered items -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -174,11 +206,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             <h2>
                                   <i class="material-icons"> transfer_within_a_station </i> Transfered Items
                             </h2>
-                        
+
                         </div>
-                        
+
                          <div class="body">
-                            <h2 class="card-inside-title"></h2>
+                           <form method="post" action="<?php echo  $_SERVER['PHP_SELF'].'?icode='.$transcode; ?>" enctype="multipart/form-data">
+                            <h2 class="card-inside-title">
+                              <input type="hidden" name="tcode" value="<?php echo $_REQUEST['icode'];?>">
+                              <button type="submit" title="Export as CSV" name="btn_branch_csv" class="btn btn-success" style="width:30px;height:30px;padding-top:0;"><i class="material-icons" style="margin-left:-6px;margin-top:2px;"> grid_on </i> </button>
+                            </h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
                             <style type="text/css">
@@ -203,7 +239,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                       </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php 
+                                                    <?php
                                                        $branch_query = "Select * from tbl_branch_goods_receive_history where transaction_number = '" . stripslashes($_GET['icode']) . "'";
                                                        $branch_result = mysqli_query($conn, $branch_query)or die('<script type="text/javascript"> alert("'. mysqli_error($conn) .'") </script>');
                                                        while($branch_rows = mysqli_fetch_array($branch_result)){
@@ -218,28 +254,29 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                    <td><?php echo $branch_rows['item_price']; ?></td>
                                                                    <td><?php echo $branch_rows['remarks']; ?></td>
                                                                    <td><?php echo $branch_rows['ts_type']; ?></td>
-                                                                 </tr> 
-                                                        <?php 
+                                                                 </tr>
+                                                        <?php
                                                        }
                                                     ?>
-                                                   
+
                                                    </tbody>
                                         </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+                           </form>
+
+
+
                             </div>
-                            
+
                            </div>
                           <a href="branch_goods_receive_history.php" style="height:30px;width:70px;padding-top:0px;" class="btn btn-warning"><i class="material-icons" style="margin-left:-2px;"> arrow_back </i> Back </a>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
-         
+
      </div>
     </section>
         <script>
@@ -248,15 +285,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 responsive:true
             });
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>

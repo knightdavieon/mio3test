@@ -1,5 +1,5 @@
 <?php require_once('Connection.php'); ?>
-<?php 
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
@@ -46,7 +46,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -54,7 +54,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
@@ -64,7 +64,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
 
 <body class="theme-black">
          <?php include("top_header.php"); ?>
-      
+
            <!-- Menu -->
              <?php include("navigation_bar.php"); ?>
             <!-- #Menu -->
@@ -74,41 +74,41 @@ $fullDate = $month . "/" . $day . "/" . $year;
                     &copy; 2018 <a href="javascript:void(0);">Silverworks.com</a>.
                 </div>
                 <div class="version">
-                    <b>Developed by: </b> John Alfonso Gamboa
+                    <!-- <b>Developed by: </b> John Alfonso Gamboa -->
                 </div>
             </div>
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                
+
             </div>
             <!-- Input -->
             <a href="branch_receiving_items.php" class="btn btn-warning"><i class="material-icons">arrow_back</i> Back </a>
             <div class="row clearfix">
-            
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
                         <div class="header">
                              <h2><i class="material-icons"> store</i> Receiving of transaction </h2>
                                 <small> <i> " Items which has been transfered from you " </i> </small>
                             </h2>
-                            
+
                         </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                   
-                                    <?php 
+
+                                    <?php
                                        $info_query = "Select * from tbl_transfers_list where transaction_number = '" . $_GET['trans_num'] . "'";
                                        $info_result = mysqli_query($conn, $info_query);
                                        $info_rows = mysqli_fetch_array($info_result);
@@ -126,26 +126,26 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                                <p> <?php echo $info_rows['person_transfered']; ?> </p>
                                            </div>
-                                         
+
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                             <label>  Transaction Number : </label>
                                            </div>
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                               <p> <?php echo $info_rows['transaction_number']; ?> </p>
                                            </div>
-                                          
+
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                               <label> Branch : </label>
                                            </div>
-                                           
+
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                               <p> <?php echo $info_rows['branch']; ?> </p>
                                            </div>
-                                           
+
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                               <label> Price : </label>
                                            </div>
-                                           <?php 
+                                           <?php
                                           $price_query = "Select * from tbl_transfers_list where transaction_number = '" . $_GET['trans_num'] . "'";
                                           $price_result = mysqli_query($conn, $price_query);
                                           $price_array = array();
@@ -157,26 +157,26 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                  $total = $price_frows['item_quant'] * $price_frows['item_price'];
                                                  $total_array[] = $total;
                                           }
-                                        
+
 
                                         ?>
-                                           
+
                                            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                                  <label style="color:#e60000;"> <small><?php   echo "P".array_sum($total_array);?> </small></label>
                                            </div>
-                                           
-                                        
-                               </div> <!-- End of Row Division -->     
+
+
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-                         
+
                         </div>
-                        
+
                     </div>
                     <div class="card">
                         <div class="header">
@@ -196,12 +196,12 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                 </li>
                             </ul>
                         </div>
-        
+
                            <?php
            if(isset($_POST['btn_commit'])){
                $quant_message = false;
                 foreach($_POST['item_barcode'] as $key => $value){
-                      
+
                          $item_barcode = mysqli_real_escape_string($conn, $_POST['item_barcode'][$key]);
                          $item_name = mysqli_real_escape_string($conn, $_POST['item_name'][$key]);
                          $cat = mysqli_real_escape_string($conn, $_POST['cat'][$key]);
@@ -225,9 +225,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                               if($update_quant_result === true){
                                    $quant_message = true;
                               }
-                              
+
                         }else{
-                            $insert_query = "Insert into tbl_branch_goods_receive(item_barcode, item_name, cat, sub_category, item_quantity, item_price, item_status, date_received, branch_name)values('" . 
+                            $insert_query = "Insert into tbl_branch_goods_receive(item_barcode, item_name, cat, sub_category, item_quantity, item_price, item_status, date_received, branch_name)values('" .
                             $item_barcode . "','" . $item_name . "','" . $cat . "','" . $sub_category . "','" . $item_quant . "','" . $item_price . "','" . "ACTIVE" . "','" . $date_received . "','" . $_SESSION['b_code'] . "')";
                             $insert_result = mysqli_query($conn, $insert_query)or die("Error : " . mysqli_error($conn));
                             if($insert_result === true){
@@ -235,11 +235,11 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             }
 
                         }
-                        
-                    
+
+
                 }
                 if($quant_message){
-                     
+
                      $insert_series_query =  "Insert into tbl_branch_goods_receive_series(transaction_number, transact_by, received_date, receiver_code, branch)values('" . $_GET['trans_num'] . "','" . $_SESSION['fullname']
                      . "','" . $fullDate . "','" . $_SESSION['b_staff_code'] . "','" . $_SESSION['b_code'] . "')";
                      $insert_series_result = mysqli_query($conn, $insert_series_query);
@@ -249,12 +249,12 @@ $fullDate = $month . "/" . $day . "/" . $year;
                      $update_trans_result = mysqli_query($conn, $update_trans_query);
                      echo '<script type="text/javascript"> alert("Successfully Added"); window.location="branch_receiving_items.php"; </script>';
                      if($update_trans_result === true){
-                             
+
                      }
-                    
-                }   
+
+                }
            }
-          
+
           ?>
            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . "?trans_num=" . $_GET['trans_num']; ?>" enctype="multipart/form-data">
                          <div class="body">
@@ -283,7 +283,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                       </tr>
                                                </thead>
                                              <tbody>
-                                                 <?php 
+                                                 <?php
                                                     $query = "Select * from tbl_transfers_list where transaction_number = '" . $_GET['trans_num'] . "'";
                                                     $result = mysqli_query($conn, $query);
                                                     while($rows = mysqli_fetch_array($result)){
@@ -308,26 +308,26 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                             <td><?php echo $rows['item_price'] ?></td>
                                                             <td><?php echo $rows['ts_type'] ?></td>
                                                             <td><?php echo $rows['date_received'] ?></td>
-                                                           
-                                                            
+
+
                                                          </tr>
                                                     <?php
                                                     }
                                                  ?>
                                               </tbody>
                                   </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
                           <a href="branch_receiving_items.php" class="btn btn-warning"><i class="material-icons">arrow_back</i> Back </a>
                           <button type="submit" class="btn btn-success" name="btn_commit"><i class="material-icons">done_all</i> Approve </button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -341,15 +341,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 paging:false
             });
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>
