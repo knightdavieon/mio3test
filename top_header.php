@@ -199,7 +199,7 @@ foreach($array as $frows){
               ?>
               <li><a href="sales_profile.php"><i class="material-icons">person</i>Profile</a></li>
               <li role="seperator" class="divider"></li>
-              
+
               <li role="seperator" class="divider"></li>
               <?php
             }
