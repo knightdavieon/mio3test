@@ -1,11 +1,11 @@
 <?php require_once('Connection.php'); ?>
-<?php 
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
 $year = date('Y');
 $fullDate = $month . "/" . $day . "/" . $year;
-  
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -54,7 +54,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
@@ -69,7 +69,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
             ob_end_clean();
             $output = fopen('php://output', 'w');
             header('Content-Type: text/csv; charset=utf-8');
-            header('Content-Disposition: attachment; filename=transaction_format.csv'); 
+            header('Content-Disposition: attachment; filename=transaction_format.csv');
             fputcsv($output, array("ITEM BARCODE", "DESCRIPTION", "CATEGORY", "SUB CATEGORY", "QUANTITY", "PRICE",  "REMARKS"));
             exit();
      }
@@ -90,14 +90,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-             
+
             </div>
             <!-- Input -->
             <div class="row clearfix">
@@ -108,42 +108,42 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                  <i class="material-icons">compare_arrows </i> Transfer Items
                                 <small> <i>  " Items available to transfer across the branches " </i> </small>
                             </h2>
-                   
+
                         </div>
-         
-   
-        
+
+
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                                 
+
                                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12"> </div>
                                    <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Employee Code </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" value="<?php echo $_SESSION['b_staff_code'] ?>" disabled="disabled" id="employee_code">
-                                                       
+
                                                   </div>
                                                </div>
                                           </div>
                                           <div class="col-md-4 col-lg-4 col-xs-10 col-sm-10">
                                           <label> Staff Name </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" value="<?php echo $_SESSION['fullname']; ?>" onchange="search_function();" disabled="disabled" id="staff_name">
-                                                       
+
                                                   </div>
                                                </div>
                                           </div>
                                           <div class="col-md-4 col-lg-4 col-xs-10 col-sm-10">
                                           <label> Transfer To </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                           <select class="form-control" id="t_branch" name="transfer_box" onchange="change_value();">
                                                                     <option selected="selected" disabled="disabled" value="select_branch"> SELECT BRANCH </option>
-                                                                   <?php 
+                                                                   <?php
                                                                       $branch_query = "Select * from tbl_branches";
                                                                       $branch_result = mysqli_query($conn, $branch_query);
                                                                       while($branch_rows = mysqli_fetch_array($branch_result)){
@@ -155,7 +155,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                       }
                                                                    ?>
                                                              </select>
-                                                   
+
                                                   </div>
                                                </div>
                                           </div>
@@ -164,29 +164,29 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                         document.getElementById("trans_value").value = document.getElementById("t_branch").value;
                                                 }
                                              </script>
-                                          
+
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> </div>
                                  <div class="col-md-3 col-lg-3 col-xs-10 col-sm-10">
-                                   
+
                                           <label> Transaction Number </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
-                                                     <?php 
+                                                     <?php
                                                         $trans_number_query = "Select  * from tbl_branch_transfer_number";
                                                         $trans_number_result = mysqli_query($conn, $trans_number_query)or die("Error : " . mysqli_error($conn));
                                                         $trans_number_rows = mysqli_fetch_array($trans_number_result);
                                                      ?>
                                                        <input type="text" class="form-control" disabled="disabled" id="trans_number" value="<?php echo $trans_number_rows['trans_number'] + 1; ?>">
-                                                      
-                                                      
+
+
                                                   </div>
                                                </div>
                                           </div>
-                                         
-                                         
+
+
                                           <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Barcode </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" id="item_barcode" onchange="search_function();">
                                                        <input type="hidden" id="branch_name" value="<?php echo $_SESSION['b_code']; ?>">
@@ -210,17 +210,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                           }else{
                                                                 document.getElementById("existing_div").innerHTML = result;
                                                           }
-                                                           
-                                                        }  
+
+                                                        }
                                                      });
                                                 }
                                              </script>
-                                         
-                                         
+
+
                                       <div id="existing_div">
                                        <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Description </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" disabled="disabled">
                                                   </div>
@@ -228,7 +228,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div>
                                          <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Category </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control"  disabled="disabled">
                                                   </div>
@@ -236,7 +236,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div>
                                               <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Sub Category </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" disabled="disabled">
                                                   </div>
@@ -244,16 +244,16 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div>
                                         <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Quantity </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" disabled="disabled">
-                                                      
+
                                                   </div>
                                                </div>
                                           </div>
                                                <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Price </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control"  disabled="disabled">
                                                   </div>
@@ -261,7 +261,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div>
                                                <div class="col-md-4 col-lg-4 col-xs-10 col-sm-10">
                                           <label> Remarks </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control"  disabled="disabled">
                                                   </div>
@@ -269,7 +269,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div>
                                      <!--     <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> TS Type </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                          <select class="form-control" id="ts_type">
                                                               <option disabled="disabled" selected="selected" value="no_selected">  SELECT TYPE </option>
@@ -283,17 +283,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           </div> -->
                                       <div class="col-md-2 col-lg-2 col-xs-10 col-sm-10">
                                           <label> Date </label>
-                                              <div class="form-group">  
+                                              <div class="form-group">
                                                  <div class="form-line">
                                                        <input type="text" class="form-control" value="<?php echo $fullDate; ?>" disabled="disabled">
                                                   </div>
                                                </div>
                                           </div>
-                                    </div>     
-                               </div> <!-- End of Row Division --> 
-                                   
+                                    </div>
+                               </div> <!-- End of Row Division -->
+
                              </div>
-                    
+
                                 <button type="button" class="btn btn-primary" id="add_item"><i class="material-icons">library_add</i> Add Item </button>
                               <script>
                                    $('#add_item').click(function(){
@@ -349,21 +349,21 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                         }
                                                     });
                                                 }
-                                                  
+
                                               }
                                          });
                                       }
                                   });
                                 </script>
                             </div>
-                            
+
                            </div>
-                       
+
 
                         <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#get_csv" style="height:30px;padding-top:0;"><i class="material-icons">attach_file</i> Get From CSV </button>
                             <a href="branch_transfer_history_page.php" class="btn btn-info" style="height:30px;padding-top:0;"><i class="material-icons">list</i> Transaction List</a>
-                         
+
                            </div>
                          <!-- Table Form Section -->
                 <div class="row clearfix">
@@ -375,9 +375,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                  Goods Receive
                                 <small> <i>  " Items which are ready to receive by specific person " </i> </small>
                             </h2>
-                   
+
                         </div> -->
-          <?php 
+          <?php
          if(isset($_POST['btn_commit'])){
     //       $transaction_number = mysqli_real_escape_string($conn, $_POST['transaction_number']);
            $trans_to = mysqli_real_escape_string($conn, $_POST['trans_to']);
@@ -386,14 +386,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
                   echo '<script type="text/javascript"> alert("Please Select branch first"); </script>';
            }else{
 
-           
+
            foreach($_POST['transaction_number'] as $key=> $value){
                  $transaction_number = mysqli_real_escape_string($conn, $_POST['transaction_number'][$key]);
                  $item_barcode = mysqli_real_escape_string($conn, $_POST['item_barcode'][$key]);
                  $item_quant = mysqli_real_escape_string($conn, $_POST['quant'][$key]);
                  $trans_to = mysqli_real_escape_string($conn, $_POST['trans_to']);
-                 
-               
+
+
                   $quant_query = "Select * from tbl_branch_goods_receive where item_barcode IN ('" . $item_barcode . "')";
                   $quant_query .= " and branch_name IN ('" . $_SESSION['b_code'] . "')";
                   $quant_result = mysqli_query($conn, $quant_query);
@@ -404,36 +404,36 @@ $fullDate = $month . "/" . $day . "/" . $year;
                       $update_result = mysqli_query($conn, $update_query)or die('<script type="text/javascript"> alert("'. mysqli_error($conn) .'") </script>');
                       $update_quantity_query = "Update tbl_branch_goods_receive set item_quantity = '" . $total_quantity . "' where item_barcode = '" . $item_barcode . "' and branch_name = '" . $_SESSION['b_code'] . "'";
                       $update_quantity_result = mysqli_query($conn, $update_quantity_query);
-                      
+
                      if($update_result === true){
                           $message_update = true;
-                     }  
-                 
+                     }
+
             }
             if($message_update){
                  echo '<script type="text/javascript"> alert("Successfully Updated"); </script>';
-                 $branch_series_query = "Insert into tbl_branch_transfer_series(transaction_number, staff_name, staff_code, transaction_date, branch_code, transfer_to, transfer_status)values('" . $transaction_number . "','" 
+                 $branch_series_query = "Insert into tbl_branch_transfer_series(transaction_number, staff_name, staff_code, transaction_date, branch_code, transfer_to, transfer_status)values('" . $transaction_number . "','"
                  . $_SESSION['fullname'] . "','" . $_SESSION['b_staff_code'] . "','" . $fullDate . "','" . $_SESSION['b_code'] . "','" . $trans_to . "','" . "PENDING" . "')";
                  $branch_series_result = mysqli_query($conn, $branch_series_query)or die('<script type="text/javascript"> alert("'. mysqli_error($conn) .'") </script>');
 
             }
-         } 
-         
+         }
+
     }
       ?>
-      
-     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">  
-      
+
+     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+
                  <!-- Hidden Fields -->
                   <input type="hidden" name="transaction_number" value="<?php echo $trans_number_rows['trans_number']; ?>">
                   <input type="hidden" name="curr_trans" value="<?php echo $trans_number_rows['trans_number'] + 1; ?>">
                  <input type="hidden" name="trans_to" id="trans_value">
-                 <?php 
+                 <?php
                      $current_docket_query = "Select * from tbl_transfer_temp where employee_code = '" . $_SESSION['b_staff_code'] . "'";
                      $current_docket_result = mysqli_query($conn, $current_docket_query);
                      $current_docket_rows = mysqli_fetch_array($current_docket_result);
                  ?>
-                 <?php 
+                 <?php
                     if(empty($current_docket_rows['transaction_number'])){
                         ?>
                         <input type="hidden" name="current_docket" id="current_docket" value="<?php echo $transfer_number_rows['transfer_number'] + 1; ?>">
@@ -443,28 +443,28 @@ $fullDate = $month . "/" . $day . "/" . $year;
                         <input type="hidden" name="current_docket" id="current_docket" value="<?php echo $current_docket_rows['transaction_number']; ?>">
                    <?php }
                  ?>
-          
+
                 <!-- #END# of hidden fields -->
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                      
-                                 <?php 
+
+                                 <?php
                                   $current_trans_number_query = "Select * from tbl_branch_transfer_item_temp where employee_code = '" . $_SESSION['b_staff_code'] . "' and receiving_status = '" . "FT" . "'";
                                   $current_trans_number_result = mysqli_query($conn, $current_trans_number_query);
                                   $current_trans_number_rows = mysqli_fetch_array($current_trans_number_result);
                                   if($current_trans_number_rows['receiving_status'] == "FT"){
                                    ?>
                                     <input type="hidden" id="trans_current_num" value="<?php echo $current_trans_number_rows['transaction_number']; ?>">
-                                   <?php 
+                                   <?php
                                    }else{
                                        ?>
                                        <input type="hidden" id="trans_current_num">
                                     <?php
                                    }
                                  ?>
-                                            
+
                                    <style type="text/css">
                                             table.dataTable thead tr{
                                                 background-color:gray;
@@ -484,13 +484,13 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                       <th> Category </th>
                                                       <th> Quantity </th>
                                                       <th> Remarks </th>
-                                                     
-                                        
-                                                   
+
+
+
                                                       </tr>
                                                  </thead>
                                                  <tbody>
-                                                     <?php 
+                                                     <?php
                                            $remaining_data_query = "Select * from tbl_branch_transfer_item_temp where employee_code = '" . $_SESSION['b_staff_code'] . "'";
                                            $remaining_data_result = mysqli_query($conn, $remaining_data_query)or die("Error : " . mysqli_error($conn));
                                                          while($remaining_data_rows = mysqli_fetch_array($remaining_data_result)){
@@ -502,7 +502,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                   <label for="<?php echo $remaining_data_rows['uid']; ?>">
                                                                 </td>
                                                                  <td>
-                                        
+
                                         <input type="hidden" id="c_trans_num" name="transaction_number[]" value="<?php echo $remaining_data_rows['transaction_number'] ?>">
                                         <input type="hidden" name="employee_code[]" value="<?php echo $remaining_data_rows['employee_code'] ?>">
                                         <input type="hidden" name="item_barcode[]" value="<?php echo $remaining_data_rows['item_barcode'] ?>">
@@ -513,7 +513,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                         <input type="hidden" name="price[]" value="<?php echo $remaining_data_rows['price'] ?>">
                                         <!--<input type="hidden" name="ts_type[]" value="<?php// echo $remaining_data_rows['ts_type'] ?>"> -->
                                         <input type="hidden" name="remarks[]" value="<?php echo $remaining_data_rows['remarks'] ?>">
-                                      <!--  <input type="hidden" name="transfer_to[]" value="<?php// echo $remaining_data_rows['transfer_to'] ?>"> --> 
+                                      <!--  <input type="hidden" name="transfer_to[]" value="<?php// echo $remaining_data_rows['transfer_to'] ?>"> -->
                                         <input type="hidden" name="transfer_date[]" value="<?php echo $remaining_data_rows['transfer_date'] ?>">
                                                                  <?php echo $remaining_data_rows['transaction_number']; ?></td>
                                                                  <td><?php echo $remaining_data_rows['employee_code']; ?></td>
@@ -523,25 +523,25 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                <!--  <td><?php //echo $remaining_data_rows['ts_type']; ?></td> -->
                                                                  <td><?php echo $remaining_data_rows['remarks']; ?></td>
                                                                <!--  <td><?php// echo $remaining_data_rows['transfer_to']; ?></td> -->
-                                                              
-                                                                
-                                                               </tr>    
+
+
+                                                               </tr>
                                         <?php
                                                            }
                                                    }
-                                                      
-                                             
+
+
                                             ?>
-                                         
+
                                                    </tbody>
-                                            
+
                                          </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
+
+
                          <script type="text/javascript">
-                                             
+
                                               $(document).ready(function(){
                                                       $('#main_check').click(function(){
                                                             if(this.checked){
@@ -566,7 +566,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                         url:"branch_transfer_delete_query.php",
                                                                         data:{'data':dataArr},
                                                                         success:function(result){
-                                                                            
+
                                                                         },
                                                                         error:function(result){
                                                                             alert(result);
@@ -576,33 +576,33 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                             }else{
                                                                  alert("No items selected");
                                                             }
-                                                       }); 
-                                                     
+                                                       });
+
 
                                               });
-                                                  
-                                                           
+
+
                                                  </script>
                             </div>
-                            
+
                            </div>
-                         <button type="submit" class="btn btn-primary" name="btn_commit" style="margin-top:-20px;" onclick="return confirm('Are you sure you want to commit this ? ')"><i class="material-icons">done</i> Commit </button>
+                         <button type="submit" class="btn btn-primary" name="btn_commit" style="margin-bottom: 25px; height:30px;padding-top:0;" onclick="return confirm('Are you sure you want to commit this ? ')"><i class="material-icons">done</i> Commit </button>
                           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-top:5px;"> </div>
                         </div>
-                        
+
                     </div>
                          <!-- #END# of Table form Section -->
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-         
+
      </div>
     </section>
 
 
-<?php 
+<?php
    if(isset($_POST['btn_import'])){
              $ins_message = false;
              $failed_message = false;
@@ -612,8 +612,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
              if($validation_count > 0){
                   echo '<script type="text/javascript"> alert("Please commit the first transaction first"); </script>';
              }else{
-             
-         
+
+
            $trans_num_query = "Select * from tbl_branch_transfer_item_temp where transaction_number = '" . mysqli_real_escape_string($conn, $_POST['curr_trans']) . "'";
              $trans_num_result = mysqli_query($conn, $trans_num_query)or die('<script type="text/javascript"> alert("'.mysqli_error($conn).'") </script>');
              $trans_num_count = mysqli_num_rows($trans_num_result);
@@ -624,7 +624,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
              $check_map = array_map('str_getcsv', file($_FILES['csv_file']['tmp_name']));
              $check_filter = array_filter(array_map('array_filter', $check_map));
              $check_count = count($check_filter);
-              
+
              if($check_count > 51){
                    echo '<script type="text/javascript"> alert("Aplogize .. but you\'ve reached the maximum limit for import of items"); </script>';
              }else{
@@ -644,18 +644,18 @@ $fullDate = $month . "/" . $day . "/" . $year;
                }else{
                   $failed_message = true;
                }
-              
-              
-             } 
-            
+
+
+             }
+
             }
-            
+
              } //Transaction number else parse
-         
+
           } // Validation else parse
            if($ins_message){
                   echo '<script type="text/javascript"> alert("Successfully Added"); </script>';
-            
+
                   $update_trans_number = "Update tbl_branch_transfer_number set trans_number = '" . $_POST['curr_trans'] . "'";
                   $update_trans_result = mysqli_query($conn, $update_trans_number)or die('<script type="text/javascript"> alert("'.mysqli_error($conn).'") </script>');
                  if($update_trans_result === true){
@@ -664,7 +664,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
              }
              if($failed_message){
                  echo '<script type="text/javascript"> alert("There were items included to your list which you dont have in your inventory"); </script>';
-             }   
+             }
    }
 ?>
  <!-- MODAL BOX 1 -->
@@ -686,30 +686,30 @@ $fullDate = $month . "/" . $day . "/" . $year;
                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> <!-- Main Margin -->
                         <div class="row">
                               <div class="col-md-5 col-lg-5 col-xs-2 col-sm-2">
-                                <input type="file" name="csv_file">          
+                                <input type="file" name="csv_file">
                                 </div>
                                <div class="col-md-3 col-lg-3 col-xs-2 col-sm-2">
-                                     <button type="submit" class="btn btn-primary" name="btn_import"><i class="material-icons">attach_file</i> Import </button>         
+                                     <button type="submit" class="btn btn-primary" name="btn_import"><i class="material-icons">attach_file</i> Import </button>
                                 </div>
                                 <div class="col-md-2 col-lg-2 col-xs-2 col-sm-2">
-                                     <button type="submit" class="btn btn-warning" style="margin-left:-25px;" name="btn_download"><i class="material-icons">insert_drive_file</i> Download File Format </button>         
-                                </div>  
+                                     <button type="submit" class="btn btn-warning" style="margin-left:-25px;" name="btn_download"><i class="material-icons">insert_drive_file</i> Download File Format </button>
+                                </div>
                               <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" style="margin-top:10px;">
                                 <label> Reminders </label>
                                    <ul>
                                      <li> Only .CSV File can be uploaded </li>
                                      <li> Check the following Requ ired Fields you should contain with it with content </li>
-                                     <li> Duplicate items will automatically rejected by the system </li> 
+                                     <li> Duplicate items will automatically rejected by the system </li>
                                      <li> Check the content of your CSV file before uploading </li>
                                       </ul>
                                 </div>
                           </div>
                     </div> <!-- #END# Main Margin -->
-                  
+
                </div>
       </div>
-      <div class="modal-footer">    
-        
+      <div class="modal-footer">
+
       </div>
     </div>
   </div>
@@ -747,7 +747,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                </tr>
                                          </thead>
                                          <tbody>
-                                               <?php 
+                                               <?php
                                                 $item_query = "Select * from tbl_branch_goods_receive where branch_name = '" . $_SESSION['b_code'] . "'";
                                                 $item_result = mysqli_query($conn, $item_query);
                                                 while($item_rows = mysqli_fetch_array($item_result)){
@@ -778,11 +778,11 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                       </script>
                           </div>
                     </div> <!-- #END# Main Margin -->
-                  
+
                </div>
       </div>
-      <div class="modal-footer">    
-        
+      <div class="modal-footer">
+
       </div>
     </div>
   </div>
@@ -801,15 +801,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                  responsive:true
             });
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>

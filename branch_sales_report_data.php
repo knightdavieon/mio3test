@@ -1,5 +1,5 @@
 <?php require_once('Connection.php'); ?>
-<?php 
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
@@ -46,7 +46,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -54,7 +54,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
@@ -80,7 +80,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
@@ -98,12 +98,12 @@ $fullDate = $month . "/" . $day . "/" . $year;
                         <div class="header">
                                 <h2><i class="material-icons"> info</i> Information </h2>
                            </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                                   <?php 
+                                   <?php
                                        $info_query = "Select * from tbl_sales_series where transaction_number = '" . mysqli_real_escape_string($conn, $_GET['scode']) .  "' and branch = '" . mysqli_real_escape_string($conn, $_GET['bcode']) . "'";
                                        $info_result = mysqli_query($conn, $info_query);
                                        $info_rows = mysqli_fetch_array($info_result);
@@ -113,7 +113,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                        $total_query = "Select Sum(total)as t_data from tbl_sales where transaction_number = '" . mysqli_real_escape_string($conn, $_GET['scode']) .  "' and branch = '" . mysqli_real_escape_string($conn, $_GET['bcode']) . "'";
                                        $total_result = mysqli_query($conn, $total_query);
                                        $total_rows = mysqli_fetch_array($total_result);
-                                   
+
                                    ?>
                                       <div class="col-md-4 col-lg-5 col-sm-5 col-xs-5">
                                             <label> Staff Code  : </label>
@@ -145,7 +145,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                             <label>  <?php echo (!isset($info_rows['customer_name'])) ? $info_rows['customer_name'] : '--'; ?>  </label>
                                          </div>
-                                         <?php 
+                                         <?php
                                          if($info_rows['payment_method'] == "cash"){
                                          ?>
                                           <div class="col-md-4 col-lg-5 col-sm-5 col-xs-5">
@@ -176,7 +176,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                          </div>
                                           <?php
                                          } ?>
-                                         
+
                                          <div class="col-md-4 col-lg-5 col-sm-5 col-xs-5">
                                             <label> Sold Items : </label>
                                          </div>
@@ -189,17 +189,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                           <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
                                             <label style="color:#ff0000;"> <small>  <?php echo "P". $total_rows['t_data']; ?> </small></label>
                                          </div>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-                         
+
                         </div>
-                        
+
                     </div>
             <!-- #END#  Item information -->
             <!-- Transfered Items Form -->
@@ -207,8 +207,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
                    <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                    
-                        
+
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
@@ -216,17 +216,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                     <button type="button" class="btn btn-warning" style="height:30px;padding-top:0px;"><i class="material-icons"> print </i> Print Preview </button>
                                     <button type="button" class="btn btn-success" style="height:30px;padding-top:0px;"><i class="material-icons">grid_on </i> Export as CSV </button>
                                     <button type="button" class="btn btn-danger" style="height:30px;padding-top:0px;"><i class="material-icons">picture_as_pdf </i> Export as PDF </button>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                           <!--   </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-                         
+
                         </div>
-                        
+
                     </div> -->
             <!-- #END# of transfered items -->
             <div class="row clearfix">
@@ -236,9 +236,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             <h2>
                                    <i class="material-icons"> store </i> Sales Record
                             </h2>
-                         
+
                         </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
@@ -258,11 +258,11 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                          <th> Quantity </th>
                                                          <th> Price </th>
                                                          <th> Transaction Date </th>
-                                                         
+
                                                       </tr>
                                                 </thead>
                                                 <tbody>
-                                                     <?php 
+                                                     <?php
                                                         $data_query = "Select * from tbl_sales where transaction_number = '" . mysqli_real_escape_string($conn, $_GET['scode']) .  "' and branch = '" . mysqli_real_escape_string($conn, $_GET['bcode']) . "'";
                                                         $data_result = mysqli_query($conn, $data_query);
                                                         while($data_rows = mysqli_fetch_array($data_result)){
@@ -273,29 +273,29 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                                <td><?php echo $data_rows['quant']; ?></td>
                                                                <td><?php echo $data_rows['price']; ?></td>
                                                                <td><?php echo $data_rows['date_transaction']; ?></td>
-                                                     
+
                                                          </tr>
                                                             <?php
                                                         }
                                                      ?>
-                                                   
+
                                                    </tbody>
                                         </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-                          <a href="branch_sales_report_page.php" style="height:30px;width:70px;padding-top:0px;" class="btn btn-warning"><i class="material-icons" style="margin-left:-2px;"> arrow_back </i> Back </a>
+                          <a href="branch_sales_report_page.php" style="margin-bottom: 25px; height:30px;padding-top:0;" class="btn btn-warning"><i class="material-icons" style="margin-left:-2px;"> arrow_back </i> Back </a>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
-         
+
      </div>
     </section>
         <script>
@@ -304,15 +304,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 responsive:true
             });
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>

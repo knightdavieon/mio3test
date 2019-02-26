@@ -270,7 +270,7 @@ exit();
                             </div>
 
                            </div>
-                          <a href="branch_goods_receive_history.php" style="height:30px;width:70px;padding-top:0px;" class="btn btn-warning"><i class="material-icons" style="margin-left:-2px;"> arrow_back </i> Back </a>
+                          <a href="branch_goods_receive_history.php" style="margin-bottom: 25px; height:30px;padding-top:0;" class="btn btn-warning"><i class="material-icons" style="margin-left:-2px;"> arrow_back </i> Back </a>
                         </div>
 
                     </div>

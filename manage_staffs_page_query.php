@@ -81,21 +81,21 @@ if(isset($_GET['ecode'])){
     </div>
   </div>
 
-  <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10">
+  <!-- <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10">
     <input type="checkbox" class="filled-in" id="ig_checkbox">
     <label for="ig_checkbox">Change Password</label>
 
-  </div>
+  </div> -->
   <div class="col-md-10 col-lg-10 col-xs-10 col-sm-10">
 
-    <div id="autoUpdate" style=" display: none;">
+    <div id="autoUpdate" >
       <div class="form-group">
         <div class="form-line">
           <label> Password </label>
           <input type="password" class="form-control" id="pass_clone" onkeyup="clone_me();">
         </div>
       </div>
-      <!-- <input type="hidden" name="b_password" value="<?php// echo $ecode_rows['b_password']; ?>" id="pass_value"> -->
+      <input type="hidden" name="b_password" value="<?php echo $ecode_rows['b_password']; ?>" id="pass_value"> 
     </div>
 
 
@@ -110,10 +110,7 @@ if(isset($_GET['ecode'])){
 }
 ?>
 
-    <!-- All Jquery -->
-    <script src="../resources/js/lib/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../resources/js/lib/bootstrap/js/popper.min.js"></script>
+
 
 
 <script>

@@ -1,5 +1,5 @@
 <?php require_once('Connection.php'); ?>
-<?php 
+<?php
 date_default_timezone_set('Asia/Manila');
 $day = date('d');
 $month = date('m');
@@ -46,7 +46,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
   <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -54,7 +54,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        
+
      <!-- End of DataTable CDN -->
 
      <!-- Font Awesome CDN -->
@@ -76,7 +76,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                     </li>
 
             <!-- Manage Items -->
-                    <?php 
+                    <?php
                         if($_SESSION['b_code'] == "SWHO"){
                             ?>
                           <li>
@@ -85,16 +85,16 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             <span>Manage Items</span>
                         </a>
                          <ul class="ml-menu">
-                                  
+
                                         <li>
                                         <a href="Create_item_page.php">Create Item</a>
                                         </li>
-                                        
-                               
+
+
                                     <li>
                                         <a href="#">Edit Items</a>
                                     </li>
-                                 
+
                                 </ul>
                     </li>
 
@@ -103,8 +103,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
                     ?>
 
                     <!-- #END# of Manage Items -->
-            <!-- Inventory -->  
-                <?php 
+            <!-- Inventory -->
+                <?php
                      if($_SESSION['b_code'] == "SWHO"){
                          ?>
                           <li>
@@ -113,7 +113,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             <span>Inventory</span>
                         </a>
                         <ul class="ml-menu">
-                                  
+
                                         <li>
                                         <a href="goods_receive_page.php">Goods Receive</a>
                                         </li>
@@ -122,14 +122,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
                     <?php
                      }else{
                           // For Branches
-                         ?>
+                         ?><a href="sales_page.php"><i class="material-icons">shopping_cart</i><span>Sales</span></a>
                          <li>
                         <a href="#" class="menu-toggle">
                             <i class="material-icons">done_all</i>
                             <span>Inventory</span>
                         </a>
                         <ul class="ml-menu">
-                                  
+
                                         <li>
                                         <a href="branch_inventory_page.php">Goods Receive</a>
                                         </li>
@@ -141,7 +141,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 ?>
                 <!-- #END# of Inventory -->
                  <!-- For Approval and Receiving -->
-                  <?php 
+                  <?php
                      if($_SESSION['b_code'] == "SWHO"){
                          ?>
                     <li>
@@ -159,25 +159,25 @@ $fullDate = $month . "/" . $day . "/" . $year;
                             <span>Receiving </span>
                         </a>
                     </li>
-                 
+
                     <?php
                      }
                   ?>
                   <!--  #END#  of for approval and receiving -->
-                   
-               <!-- Lookup -->    
 
-               <?php 
+               <!-- Lookup -->
+
+               <?php
                    if($_SESSION['b_code'] == "SWHO"){
                     ?>
                       <li>
                             <a href="swho_transfer_items_page.php">
-                             
+
                                <i class="material-icons">find_in_page</i>
                                     <span>Lookup</span>
                              </a>
-                      
-                          
+
+
                        </li>
                 <?php
                    }else{
@@ -187,9 +187,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                 <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">find_in_page</i>
                                     <span>Lookup</span>
-                                </a>    
+                                </a>
                                 <ul class="ml-menu">
-                                  
+
                                         <li>
                                         <a href=" branch_transfer_history_page.php">Transfer Stocks</a>
                                         </li>
@@ -199,47 +199,47 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                      <li>
                                         <a href="branch_sales_report_page.php">Sales Report</a>
                                     </li>
-                                  
+
                                 </ul>
                             </li>
-                
+
                 <?php
                    }
                ?>
                <!-- #END# of lookup -->
 
                <!-- Transfer Stocks -->
-                 <?php 
+                 <?php
                     if($_SESSION['b_code'] == "SWHO"){
                         ?>
                 <li>
                             <a href="transfer_page.php">
-                             
+
                                <i class="material-icons">repeat</i>
                                     <span>Transfer Stocks</span>
                              </a>
-                      
-                          
+
+
                        </li>
-                
+
                 <?php
                     }else{
                         ?>
                         <li>
                             <a href="#">
-                             
+
                                <i class="material-icons">repeat</i>
                                     <span>Transfer Stocks</span>
                              </a>
-                      
-                          
+
+
                        </li>
                     <?php
                     }
                  ?>
-                <!-- #END# of transfer stocks -->         
-                 <!-- Reports --> 
-                 <?php 
+                <!-- #END# of transfer stocks -->
+                 <!-- Reports -->
+                 <?php
                     if($_SESSION['b_code'] == "SWHO"){
                        ?>
                          <li>
@@ -248,7 +248,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                     <span>Reports</span>
                                 </a>
                                 <ul class="ml-menu">
-                                  
+
                                         <li>
                                         <a href="#">Transfer Stocks</a>
                                         </li>
@@ -276,7 +276,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                     }
                  ?>
                  <!-- #END# of reports -->
-                          
+
                           <!-- Settings -->
                              <li>
                                 <a href="javascript:void(0);" class="menu-toggle">
@@ -284,9 +284,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                     <span>Settings</span>
                                 </a>
                                 <ul class="ml-menu">
-                                  
+
                                         <li>
-                                        <?php 
+                                        <?php
                                            if($_SESSION['b_code'] == "SWHO"){
                                                ?>
                                         <a href="new_user_page.php">New User</a>
@@ -301,14 +301,14 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                         <?php
                                            }
                                         ?>
-                                     
+
                                         </li>
                                 </ul>
                             </li>
                           <!-- #END# of Settings -->
-                        
-                           <!-- Import -->  
-                           <?php 
+
+                           <!-- Import -->
+                           <?php
                              if($_SESSION['b_code'] == "SWHO"){
                                  ?>
 
@@ -318,7 +318,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                     <span>Import &amp; Export</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    
+
                                     <li>
                                         <a href="#"> Import of items </a>
                                         <a href="#"> Export Database </a>
@@ -328,8 +328,8 @@ $fullDate = $month . "/" . $day . "/" . $year;
 
                                 <?php
                              }
-                           ?>                      
-                          
+                           ?>
+
                             <!-- #END# of Import -->
                 </ul>
             </div>
@@ -347,17 +347,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
         </aside>
         <!-- #END# Left Sidebar -->
            <!-- Rigth Side Bar -->
-                
+
         <!-- #END# of Right Side Bar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-          
+
             </div>
             <!-- Input -->
-           
+
             <div class="row clearfix">
               <!-- First Form -->
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -365,17 +365,17 @@ $fullDate = $month . "/" . $day . "/" . $year;
                         <div class="header">
                             <h2>
                                <i class="material-icons"> account_circle </i>   Sales Profile
-                            
+
                                 <small> <i> " Account information of <?php echo $_SESSION['fullname']; ?> " </i> </small>
                             </h2>
-                         
+
                         </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
                            <div class="col-md-12 col-sm-10 col-xs-10">
-                                   <?php 
+                                   <?php
                                       // Staff query
                                       $staff_query = "Select * from tbl_users where b_staff_code = '" . $_SESSION['b_staff_code'] . "'";
                                       $staff_result = mysqli_query($conn, $staff_query)or die('<script type="text/javascript"> alert("'.mysqli_error($conn).'") </script>');
@@ -390,7 +390,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                       $total_query = "Select Sum(total)as total_sales from tbl_sales where staff_code = '" . $_SESSION['b_staff_code'] . "'";
                                       $total_result = mysqli_query($conn, $total_query)or die('<script type="text/javascript"> alert("'.mysqli_error($conn).'") </script>');
                                       $total_rows = mysqli_fetch_array($total_result);
-                                      
+
                                    ?>
                                      <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5">
                                         <label> Staff Code : </label>
@@ -422,15 +422,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                       <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5">
                                         <label style="color:#ff0000;"><small><?php echo "P" . $total_rows['total_sales']; ?></small></label>
                                       </div>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-         
+
                   </div>
                   <!--#END# First Form -->
 
@@ -442,9 +442,9 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                  <i class="material-icons"> verified_user </i> Sales Table
                               <small> <i> " List of items which has been sold by <?php echo $_SESSION['fullname']; ?> " </i> </small>
                             </h2>
-                         
+
                         </div>
-                        
+
                          <div class="body">
                             <h2 class="card-inside-title"></h2>
                             <div class="row clearfix">
@@ -468,7 +468,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                     </tr>
                                                  </thead>
                                                  <tbody>
-                                                      <?php 
+                                                      <?php
                                                          $info_query = "Select * from tbl_sales_series where staff_code = '" . $_SESSION['b_staff_code'] . "'";
                                                          $info_result = mysqli_query($conn, $info_query);
                                                          while($info_rows = mysqli_fetch_array($info_result)){
@@ -486,26 +486,26 @@ $fullDate = $month . "/" . $day . "/" . $year;
                                                       ?>
                                                    </tbody>
                                           </table>
-                               </div> <!-- End of Row Division -->     
+                               </div> <!-- End of Row Division -->
                              </div>
-                       
-                             
-                      
+
+
+
                             </div>
-                            
+
                            </div>
-     
+
                         </div>
                            <!-- #END# Second Form -->
-                    
+
 
                     </div>
 
-                   
+
 
                 </div>
             </div>
-         
+
      </div>
     </section>
         <script>
@@ -514,15 +514,15 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 responsive:true
             });
         });
-            
+
           </script>
 
-                     
+
                              </div> <!-- End of Button DIV -->
-                       
-                       
+
+
     <!-- Jquery Core Js -->
-   
+
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>

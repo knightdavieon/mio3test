@@ -134,10 +134,12 @@ if($_SESSION['admin_priv'] != "B_ADMIN"){
         // For Branches
         ?>
         <li <?php echo ("/mio3/branch_inventory_page.php") ? 'class="active"' : ''; ?>>
+          <a href="sales_page.php"><i class="material-icons">shopping_cart</i><span>Sales</span></a>
           <a href="#" class="menu-toggle">
             <i class="material-icons">done_all</i>
             <span>Inventory</span>
           </a>
+
           <ul class="ml-menu">
 
             <li <?php echo ("/mio3/branch_inventory_page.php") ? 'class="active"' : ''; ?>>

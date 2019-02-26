@@ -333,6 +333,10 @@ $(function () {
 
 </div> <!-- End of Button DIV -->
 
+<!-- All Jquery -->
+<script src="../resources/js/lib/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+
 
 <!-- Jquery Core Js -->
 <!-- <script src="Jquery/jquery-2.2.3.min.js"></script> -->
@@ -360,9 +364,9 @@ $(function () {
 
 <!-- Custom Js -->
 <script src="js/admin.js"></script>
-<script src="js/pages/forms/basic-form-elements.js"></script>
+<!-- <script src="js/pages/forms/basic-form-elements.js"></script> -->
 
 <!-- Demo Js -->
-<script src="js/demo.js"></script>
+<!-- <script src="js/demo.js"></script> -->
 </body>
 </html>
