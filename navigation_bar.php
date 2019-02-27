@@ -6,6 +6,7 @@ if($_SESSION['admin_priv'] != "B_ADMIN"){
   <div class="menu">
     <ul class="list">
       <li class="header">MAIN NAVIGATION</li>
+
       <li <?php echo ("/mio3/sales_page.php") ? 'class="active"' : ''; ?>> </li>
       <li <?php echo ("/mio3/dashboard.php") ? 'class="active"' : ''; ?>>
         <a href="dashboard.php">
@@ -75,6 +76,7 @@ if($_SESSION['admin_priv'] != "B_ADMIN"){
   <div class="menu">
     <ul class="list">
       <li class="header">MAIN NAVIGATION</li>
+
       <li <?php echo ("/mio3/sales_page.php") ? 'class="active"' : ''; ?>> </li>
       <li <?php echo ("/mio3/dashboard.php") ? 'class="active"' : ''; ?>>
         <a href="dashboard.php">

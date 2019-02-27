@@ -128,6 +128,7 @@ $fullDate = $month . "/" . $day . "/" . $year;
                 }
                 ?>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                  <?php echo $_SERVER['PHP_SELF'];?>
                   <style type="text/css">
                   table.dataTable thead th{
                     background-color:gray;

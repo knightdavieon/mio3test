@@ -171,8 +171,8 @@ foreach($array as $frows){
     <!-- User Info -->
     <div class="user-info">
       <div class="image">
-        <div style="background-color:#fff;border-radius:100px;height:50px;width:50px;padding-top:6px;padding-left:7px;">
-          <img src="Icons/SWLogoIcon.png" width="35" height="35" alt="User" />
+        <div style="">
+          <img src="Icons/miomiologo.png" width="55" height="55" alt="User" style="border-radius:0;" />
         </div>
       </div>
       <?php
@@ -187,7 +187,7 @@ foreach($array as $frows){
       ?>
       <div class="info-container" style="margin-top:-18px">
         <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['fullname']; ?></div>
-        <div class="email"><?php echo $_SESSION['email']; ?></div>
+        <div class="email"><?php echo  $_SESSION['email']; ?></div>
         <div class="email"> Branch : <label> <?php echo $_SESSION['b_code']; ?> </label> </div>
         <div class="btn-group user-helper-dropdown">
           <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
